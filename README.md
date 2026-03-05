@@ -5,8 +5,9 @@ A lightweight Swift library for building rich `NSAttributedString` from composab
 ## Features
 
 - **Section-based layout** — each section renders as a single line, items flow inline
-- **Rich inline items** — text, bold, italic, images, HTML, and tappable links
+- **Rich inline items** — text, bold, italic, strikethrough, images, HTML, and tappable links
 - **Per-item overrides** — customize font, size, and color on individual items
+- **Per-section paragraph style** — alignment, indentation, and line spacing per section
 - **Reusable configuration** — define `RTBuilderConfiguration` once, share across builders
 - **Tappable links** — built-in handler support with or without a URL
 - **Inline images** — embed icons and badges via `NSTextAttachment`, auto-aligned to text
@@ -49,7 +50,7 @@ textView.attributedText = result.attributedString
 
 ### Core Concept
 
-A **section** is a single line. Each section contains one or more **items** that render inline:
+A **section** is a single line. Each section contains one or more **items** that render inline. Sections are separated by automatic line breaks:
 
 ```swift
 RTBuilder()
@@ -77,9 +78,56 @@ RTBuilder()
 | `.text` | Plain text with optional `font` and `color` override |
 | `.bold` | Bold text with optional `size` and `color` override |
 | `.italic` | Italic text with optional `size` and `color` override |
+| `.strikethrough` | Strikethrough text with optional `size` and `color` override |
 | `.image` | Inline image with optional `size` |
 | `.html` | HTML string with optional inline styles |
 | `.link` | Tappable link with optional URL and tap handler |
+
+### Strikethrough
+
+Useful for showing old prices, deprecated info, or corrections:
+
+```swift
+.section {
+    $0.text("Price: ")
+      .strikethrough("$9.99", color: .systemRed)
+      .text(" ")
+      .bold("$4.99", color: .systemGreen)
+      .text(" (50% off!)")
+}
+```
+
+### Section Style
+
+Each section can have its own paragraph style via `RTSectionStyle`. When not provided, the builder's global alignment and line spacing are used:
+
+```swift
+// Left-aligned with indent
+.section(style: RTSectionStyle(alignment: .left, indent: 24)) {
+    $0.bold("Note: ", color: .systemOrange)
+      .text("This section is indented 24pt from the left.")
+}
+
+// Right-aligned signature
+.section(style: RTSectionStyle(alignment: .right)) {
+    $0.italic("— The Author", size: 12, color: .gray)
+}
+
+// First-line indent for paragraph style
+.section(style: RTSectionStyle(alignment: .left, firstLineIndent: 32)) {
+    $0.text("The first line starts further in while subsequent lines wrap normally.")
+}
+```
+
+Available properties on `RTSectionStyle`:
+
+| Property | Description | Default |
+|----------|-------------|---------|
+| `alignment` | Text alignment override | Global |
+| `indent` | Head indent (left margin) | `0` |
+| `firstLineIndent` | First-line head indent | `0` |
+| `tailIndent` | Tail indent (negative = inset from right) | `0` |
+| `lineSpacing` | Line spacing override | Global |
 
 ### Global Style
 
@@ -185,16 +233,18 @@ Apply inline CSS to `.html` items:
 
 ```
 Sources/
-├── RTItem.swift                   // Inline content unit
-├── RTItemBuilder.swift            // Builder for items within a section
-├── RTSection.swift                // Section enum (items or spacing)
-├── RTBuilder.swift                // Main builder class
-├── RTBuilderConfiguration.swift   // Reusable style config
-├── RTHTMLStyle.swift              // HTML inline styles
-└── RTResult.swift                 // Build output
+├── Enum/
+│   ├── RTSection.swift              // Section enum (items or spacing)
+│   ├── RTItem.swift                 // Inline content unit
+│   └── RTHTMLStyle.swift            // HTML inline styles
+├── RTBuilder.swift                  // Main builder class
+├── RTBuilderConfiguration.swift     // Reusable style config
+├── RTItemBuilder.swift              // Builder for items within a section
+├── RTResult.swift                   // Build output
+└── RTSectionStyle.swift             // Per-section paragraph style
 
 Demo/
-└── ViewController.swift           // Usage example
+└── ViewController.swift             // Usage example
 ```
 
 ## License
