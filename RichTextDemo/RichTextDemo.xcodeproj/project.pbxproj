@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		68D310A52F57EC920050A255 /* RichTextSection in Frameworks */ = {isa = PBXBuildFile; productRef = 68D310A42F57EC920050A255 /* RichTextSection */; };
+		68A99CC62F591E1200E90DA2 /* RichTextSection in Frameworks */ = {isa = PBXBuildFile; productRef = 68A99CC52F591E1200E90DA2 /* RichTextSection */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68D310A52F57EC920050A255 /* RichTextSection in Frameworks */,
+				68A99CC62F591E1200E90DA2 /* RichTextSection in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,7 +83,7 @@
 			);
 			name = RichTextDemo;
 			packageProductDependencies = (
-				68D310A42F57EC920050A255 /* RichTextSection */,
+				68A99CC52F591E1200E90DA2 /* RichTextSection */,
 			);
 			productName = RichTextDemo;
 			productReference = 68D3108B2F57EC200050A255 /* RichTextDemo.app */;
@@ -114,7 +114,7 @@
 			mainGroup = 68D310822F57EC200050A255;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				68D310A32F57EC920050A255 /* XCRemoteSwiftPackageReference "RichTextSections" */,
+				68A99CC42F591E1200E90DA2 /* XCRemoteSwiftPackageReference "RichTextSections" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 68D3108C2F57EC200050A255 /* Products */;
@@ -358,7 +358,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		68D310A32F57EC920050A255 /* XCRemoteSwiftPackageReference "RichTextSections" */ = {
+		68A99CC42F591E1200E90DA2 /* XCRemoteSwiftPackageReference "RichTextSections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ATiOSModule/RichTextSections";
 			requirement = {
@@ -369,9 +369,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		68D310A42F57EC920050A255 /* RichTextSection */ = {
+		68A99CC52F591E1200E90DA2 /* RichTextSection */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 68D310A32F57EC920050A255 /* XCRemoteSwiftPackageReference "RichTextSections" */;
+			package = 68A99CC42F591E1200E90DA2 /* XCRemoteSwiftPackageReference "RichTextSections" */;
 			productName = RichTextSection;
 		};
 /* End XCSwiftPackageProductDependency section */
